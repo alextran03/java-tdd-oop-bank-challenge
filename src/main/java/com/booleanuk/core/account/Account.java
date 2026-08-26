@@ -1,5 +1,7 @@
 package com.booleanuk.core.account;
 
+import com.booleanuk.core.exceptions.InsufficientFundsException;
+import com.booleanuk.core.exceptions.InvalidAmountException;
 import com.booleanuk.core.transaction.Transaction;
 import com.booleanuk.core.transaction.TransactionType;
 
@@ -13,10 +15,21 @@ public abstract class Account {
 
     public void deposit(double amount, LocalDate date) {
         transactions.add(new Transaction(date, amount, TransactionType.CREDIT));
+        if(amount < 0) {
+            throw new InvalidAmountException(amount);
+        }
+        transactions.add(new Transaction(date, amount, TransactionType.CREDIT));
 
     }
 
     public void withdraw(double amount, LocalDate date) {
+        if (amount <= 0) {
+            throw new InvalidAmountException(amount);
+        }
+
+        if (!canWithdraw( amount,  date)) {
+            throw new InsufficientFundsException(amount, getBalance());
+        }
         transactions.add(new Transaction(date, amount, TransactionType.DEBIT));
 
     }
