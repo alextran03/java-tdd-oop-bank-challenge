@@ -13,6 +13,10 @@ public class Transaction {
     this.type = type;
     }
 
+    public String toStatementRow(double runningBalance) {
+        String formattedDate = date.format
+    }
+
     public LocalDate getDate() {
         return date;
     }

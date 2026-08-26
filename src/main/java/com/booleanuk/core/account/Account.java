@@ -8,14 +8,14 @@ import com.booleanuk.core.transaction.TransactionType;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public abstract class Account {
     private String accountNumber;
     private List<Transaction> transactions = new ArrayList<>();
 
     public void deposit(double amount, LocalDate date) {
-        transactions.add(new Transaction(date, amount, TransactionType.CREDIT));
-        if (amount < 0) {
+        if (amount <= 0) {
             throw new InvalidAmountException(amount);
         }
         transactions.add(new Transaction(date, amount, TransactionType.CREDIT));
@@ -44,7 +44,17 @@ public abstract class Account {
     }
 
     public boolean canWithdraw(double amount, LocalDate date) {
-        return false;
+        return getBalance() >= amount;
+    }
+
+    public String printStatement() {
+        List<Transaction> transactions = new ArrayList<>();
+        double balance = 0;
+        for (Transaction transaction : transactions) {
+            balance = transaction.getType().apply(balance, transaction.getAmount());
+            rows.add(transaction.toStatemenRow(Balance);
+
+        }
     }
 
 }
