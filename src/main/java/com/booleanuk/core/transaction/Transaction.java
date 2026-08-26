@@ -1,6 +1,7 @@
 package com.booleanuk.core.transaction;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     private final LocalDate date;
@@ -13,8 +14,16 @@ public class Transaction {
     this.type = type;
     }
 
-    public String toStatementRow(double runningBalance) {
-        String formattedDate = date.format
+    public String getFormattedDate() {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public String getCreditString() {
+        return type == TransactionType.CREDIT ? String.format("%.2f", amount) : "";
+    }
+
+    public String getDebitString() {
+        return type == TransactionType.DEBIT ? String.format("%.2f", amount) : "";
     }
 
     public LocalDate getDate() {
@@ -28,4 +37,6 @@ public class Transaction {
     public TransactionType getType() {
         return type;
     }
+
+
 }

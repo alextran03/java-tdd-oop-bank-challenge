@@ -33,10 +33,11 @@ public class AccountTest {
     public void testBankStatementprint() {
         currentAccount.deposit(150.0, LocalDate.of(2026, 8, 26));
         currentAccount.withdraw(100.0, LocalDate.of(2026, 8, 26));
+
         String expected =
-                        "date       || credit  || debit  || balance\n" +
-                        "26/08/2026 ||         || 100.00 || 50.00\n" +
-                        "26/08/2026 || 150.00  ||        || 150.00";
+                "date       || credit || debit  || balance\n" +
+                        "26/08/2026 ||        || 100.00 || 50.00\n" +
+                        "26/08/2026 || 150.00 ||        || 150.00";
 
         assertEquals(expected, currentAccount.printStatement());
     }
