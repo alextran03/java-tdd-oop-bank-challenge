@@ -1,5 +1,5 @@
 package com.booleanuk.core.transaction;
 
-public class TransactionType {
-    
+public enum TransactionType {
+    CREDIT, DEBIT
 }
