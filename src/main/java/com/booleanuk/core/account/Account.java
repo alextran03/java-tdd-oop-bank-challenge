@@ -15,7 +15,7 @@ public abstract class Account {
 
     public void deposit(double amount, LocalDate date) {
         transactions.add(new Transaction(date, amount, TransactionType.CREDIT));
-        if(amount < 0) {
+        if (amount < 0) {
             throw new InvalidAmountException(amount);
         }
         transactions.add(new Transaction(date, amount, TransactionType.CREDIT));
